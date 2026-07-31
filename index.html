@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="A beautiful, minimal Pomodoro Focus Timer to boost your productivity.">
+   <title>Pomodoro — Focus Timer</title>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap"
+      rel="stylesheet">
+
+   <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+   <!-- Animated background -->
+   <canvas id="bg-canvas"></canvas>
+   <div class="bg-gradient-overlay"></div>
+
+   <div class="app-wrapper">
+
+      <!-- Motivational quote -->
+      <p class="motivational-quote" id="quote-text">"Focus is the art of knowing what to ignore."</p>
+
+      <main class="timer-card" id="timer-card">
+
+         <!-- Mode selector tabs -->
+         <div class="mode-tabs">
+            <button id="pomodoro-mode" class="mode-tab active" data-mode="pomodoro">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+               </svg>
+               Focus
+            </button>
+            <button id="short-break-mode" class="mode-tab" data-mode="short">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                  <line x1="6" x2="6" y1="2" y2="4"/>
+                  <line x1="10" x2="10" y1="2" y2="4"/>
+                  <line x1="14" x2="14" y1="2" y2="4"/>
+               </svg>
+               Short Break
+            </button>
+            <button id="long-break-mode" class="mode-tab" data-mode="long">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                  <line x1="6" x2="6" y1="1" y2="4"/>
+                  <line x1="10" x2="10" y1="1" y2="4"/>
+                  <line x1="14" x2="14" y1="1" y2="4"/>
+               </svg>
+               Long Break
+            </button>
+         </div>
+
+         <!-- Timer Display with Progress Ring -->
+         <div id="timer-visual-container" class="timer-ring-wrapper">
+            <svg class="progress-svg" viewBox="0 0 200 200">
+               <!-- Outer decorative ring -->
+               <circle class="ring-deco ring-deco-1" cx="100" cy="100" r="95" />
+               <!-- Tick marks -->
+               <g class="tick-marks" id="tick-marks"></g>
+               <!-- Background track -->
+               <circle class="ring-track" cx="100" cy="100" r="82" />
+               <!-- Progress arc -->
+               <circle id="progress-ring-circle" class="ring-progress" cx="100" cy="100" r="82" />
+               <!-- Inner glow circle -->
+               <circle class="ring-inner-glow" cx="100" cy="100" r="68" />
+            </svg>
+            <div class="timer-text-group">
+               <h1 id="time-display" class="timer-digits">25:00</h1>
+               <p id="current-mode-display" class="timer-label">Focus</p>
+            </div>
+         </div>
+
+         <!-- Control Buttons -->
+         <div class="controls">
+            <button id="start-pause-button" class="btn-primary" aria-label="Start or pause timer">
+               <svg class="btn-icon" id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+               </svg>
+               <svg class="btn-icon hidden" id="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="6" y="4" width="4" height="16"/>
+                  <rect x="14" y="4" width="4" height="16"/>
+               </svg>
+               <span id="btn-label">START</span>
+            </button>
+            <button id="reset-button" class="btn-secondary" aria-label="Reset timer">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 2v6h6" />
+                  <path d="M21 12A9 9 0 0 0 6 5.3L3 8" />
+                  <path d="M21 22v-6h-6" />
+                  <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7" />
+               </svg>
+            </button>
+         </div>
+
+         <!-- Session counter -->
+         <div class="session-counter">
+            <div class="session-dots" id="session-dots">
+               <span class="dot"></span>
+               <span class="dot"></span>
+               <span class="dot"></span>
+               <span class="dot"></span>
+            </div>
+            <p class="session-label">
+               <span id="pomodoro-count">0</span> sessions completed
+            </p>
+         </div>
+      </main>
+
+      <footer class="app-footer">
+         <p>Stay focused. Stay productive. 🍅</p>
+      </footer>
+   </div>
+
+   <script src="script.js"></script>
+</body>
+
+</html>
